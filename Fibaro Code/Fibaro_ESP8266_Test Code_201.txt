@@ -1,0 +1,47 @@
+local thisdevice = fibaro:getSelfId() 
+
+-- the next line uses the VD information and calls the ESP8266 
+
+local conn = Net.FHttp(fibaro:getValue(thisdevice, 'IPAddress'), fibaro:getValue(thisdevice, 'TCPPort')) 
+
+
+-- if there's a path name, then put it in the GET() method. 
+-- in "101" there is no path needed to get a sample JSON returned
+
+
+response, status, errorCode = conn:GET('/') 
+
+
+-- "response"  will hold the JSON coming back 
+
+fibaro:debug(response) 
+
+  
+
+-- good practice 
+
+fibaro:sleep(1) 
+
+if errorCode == 0 then 
+	-- so , you got something back ok 
+	-- the Status is not really needed, unless you're going to deal with non-200 HTTP Status codes 
+
+  fibaro:debug(status) 
+
+	-- Example processing JSON 
+
+  jsonTable = json.decode(response) 
+
+  -- there are three elements that come back in the "101" sample ESP8266 code
+	
+	fibaro:call(thisdevice, "setProperty", "ui.Label1.value", jsonTable.JsonElementName1)
+  fibaro:call(thisdevice, "setProperty", "ui.Label2.value", jsonTable.JsonElementName2) 
+  fibaro:call(thisdevice, "setProperty", "ui.Label3.value", jsonTable.JsonElementName3) 
+
+else 
+
+	-- so we had a non-zero error code 
+
+  fibaro:debug("error") 
+
+end 
