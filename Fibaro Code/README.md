@@ -8,9 +8,9 @@ In the "General" Section
 In the "Advanced" Section
 
 - Add a button - call it "Test ESP8266"
-- Add to Labels - leave them as the default names
-- Add the code to the LUA section for the button
+- Add three Labels - leave them as the default names given by Fibaro
 
+- Add the code to the LUA section for the button
 - Save the Device
 
 To test
@@ -18,8 +18,9 @@ To test
 - Press "Debug" for the "Test ESP8266" button
 - Press "Start" to enable debugging
 - In the new window, press "Test ESP8266"
-- Esure there's text returned - it will be JSON if you are using the companion ESP8266 code
+- Ensure there's text returned - it will be JSON if you are using the companion ESP8266 code
 
+- if all is well, the labels created above should hold the result of the JSON sent from ESP8266
 
 If there are issues 
 - in a browser, check that there's some text returned when you select the IP address used in the "General" tab above.
